@@ -50,19 +50,24 @@ $(function(){
     $('.reveal').each(function(){ io.observe(this); });
   } else { $('.reveal').addClass('in'); }
 
-  // Contact form mailto
+  // Contact form — salvează în DB + deschide mailto
   $('#contact-form').on('submit', function(e){
     e.preventDefault();
+    var $form = $(this);
     var d = {};
-    $(this).serializeArray().forEach(function(p){ d[p.name]=p.value; });
-    var subj = encodeURIComponent('Cerere ofertă — '+(d.type||'Eveniment')+' — '+(d.name||''));
-    var body = encodeURIComponent(
-      'Nume: '+d.name+'\nEmail: '+d.email+'\nTelefon: '+d.phone+
-      '\nTip eveniment: '+d.type+'\nData: '+d.date+'\nInvitați: '+d.guests+
-      '\n\nDetalii:\n'+d.message
-    );
-    window.location.href = 'mailto:contact@palatulnoblesse.ro?subject='+subj+'&body='+body;
-    $('#form-success').show();
-    this.reset();
+    $form.serializeArray().forEach(function(p){ d[p.name]=p.value; });
+
+    $.post('/contact-submit.php', $form.serialize())
+      .always(function(){
+        var subj = encodeURIComponent('Cerere ofertă — '+(d.type||'Eveniment')+' — '+(d.name||''));
+        var body = encodeURIComponent(
+          'Nume: '+d.name+'\nEmail: '+d.email+'\nTelefon: '+d.phone+
+          '\nTip eveniment: '+d.type+'\nData: '+d.date+'\nInvitați: '+d.guests+
+          '\n\nDetalii:\n'+d.message
+        );
+        window.location.href = 'mailto:contact@palatulnoblesse.ro?subject='+subj+'&body='+body;
+        $('#form-success').show();
+        $form[0].reset();
+      });
   });
 });

@@ -1,0 +1,32 @@
+Options -Indexes
+RewriteEngine On
+RewriteBase /
+
+# Admin panel protejat
+RewriteRule ^admin/?$ /admin/index.php [L]
+
+# Servește index.php pentru /
+DirectoryIndex index.php index.html
+
+# URL-uri curate: /contact/ sau /contact → contact.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# URL-uri curate pentru subdirectoare: /servicii/servicii-culinare/ → servicii/servicii-culinare.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# Securitate: blochează accesul la fișiere sensibile
+<FilesMatch "\.(sql|json|log|env|md)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(config|includes)/">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
