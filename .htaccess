@@ -1,0 +1,33 @@
+Options -Indexes
+
+# ── URL-uri curate (.php opțional) ───────────────────────────
+RewriteEngine On
+RewriteBase /
+
+# Admin index
+RewriteRule ^admin/?$ /admin/index.php [L]
+
+# slug → slug.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
+
+# ── Blochează accesul la fișiere sensibile ────────────────────
+<FilesMatch "\.(sql|json|env|log|md|sh|py)$">
+    Require all denied
+</FilesMatch>
+
+# Blochează config/
+<IfModule mod_rewrite.c>
+    RewriteRule ^config/ - [F,L]
+    RewriteRule ^includes/ - [F,L]
+    RewriteRule ^scripts/ - [F,L]
+</IfModule>
+
+# ── Security headers ─────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
