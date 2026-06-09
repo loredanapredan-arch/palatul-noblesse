@@ -17,6 +17,6 @@ Options -Indexes
 </Files>
 
 # Blochează accesul direct la fișiere interne
-<FilesMatch "^(auth|install)\.php$">
+<FilesMatch "^(auth|install|partials)\.php$">
     Require all denied
 </FilesMatch>
