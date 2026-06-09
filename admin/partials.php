@@ -21,6 +21,7 @@ function admin_nav(string $active = ''): void
     $username = htmlspecialchars($admin['username']);
     $nav_items = [
         'index'      => ['Dashboard',   'index.php'],
+        'home'       => ['Homepage',    'home-edit.php'],
         'portofoliu' => ['Portofoliu',  'pages-list.php?type=portofoliu'],
         'servicii'   => ['Servicii',    'pages-list.php?type=servicii'],
         'saloane'    => ['Saloane',     'pages-list.php?type=saloane'],
