@@ -123,7 +123,7 @@ body { overflow-y: auto }
 </style>
 </head>
 <body>
-<?php admin_nav('') ?>
+<?php admin_nav('home') ?>
 
 <div class="container-xl py-4 px-4">
 

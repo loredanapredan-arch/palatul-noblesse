@@ -102,6 +102,16 @@ $total = array_sum($counts);
   <!-- Sections -->
   <div class="row g-4">
     <div class="col-md-4">
+      <div class="card-admin h-100" style="border-color:rgba(201,161,74,.4);background:linear-gradient(135deg,#fff 60%,#fdf8ee)">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <div class="eyebrow" style="color:var(--gold)">Homepage</div>
+          <span style="font-size:1.2rem">🏠</span>
+        </div>
+        <p class="text-muted small mb-3">Editează toate secțiunile paginii principale: hero, povestea, grila de carduri, testimoniale și altele.</p>
+        <a href="home-edit.php" class="btn btn-sm btn-gold" style="display:inline-block">✎ Editează Homepage</a>
+      </div>
+    </div>
+    <div class="col-md-4">
       <div class="card-admin h-100">
         <div class="d-flex align-items-center justify-content-between mb-3">
           <div class="eyebrow">Portofoliu</div>
